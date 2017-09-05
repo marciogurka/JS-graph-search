@@ -2,14 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Algorithms Searches </title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Search Algorithms </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="brazil.js"></script>
     <script src="arbor.js"></script>
     <script src="arbor-tween.js"></script>
     <script src="graphics.js"></script>
+    <script src="script.js"></script>
+    <script src="searchAlgorithms.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/FontAwesome.otf">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-green.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        #brazil-map {
+            margin: 10px auto;
+            height: 70vh;
+            width: 100%;
+        }
+
+        .footer {
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mdl-logo {
+            color: rgb(158, 158, 158) !important;
+            margin: 0 15px;
+        }
+        .footer-name {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-weight: inherit !important;
+            cursor: pointer;
+        }
+        .mdl-mini-footer__link-list > li {
+            margin: 0;
+        }
+        .emoji {
+            height: 1em !important;
+            width: 1em !important;
+            margin: 0 .07em !important;
+        }
+
+    </style>
 </head>
 <body>
-    <canvas id="viewport" width="1000" height="600"></canvas>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Graph Search Algorithms</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Map</a>
+            <a href="#scroll-tab-2" class="mdl-layout__tab">Graph</a>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Graph Search</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+                <div class="page-content">
+                    <!-- Left aligned menu below button -->
+                    <button id="demo-menu-lower-left"
+                            class="mdl-button mdl-js-button">
+                        <span>Choose your search</span>
+                    </button>
+
+                    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                        for="demo-menu-lower-left">
+                        <li class="mdl-menu__item" id="option-bfs">Breadth-First Search (BFS)</li>
+                        <li class="mdl-menu__item">Depth-First Search (DFS)</li>
+                        <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">A*</li>
+                        <li class="mdl-menu__item">Compare Methods</li>
+                    </ul>
+                    <div id="brazil-map"></div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+                <div class="page-content">
+                    <canvas id="viewport" width="800" height="600"></canvas>
+                </div>
+            </section>
+
+        </div>
+        <!-- Material Snackbar -->
+        <div id="demo-snackbar" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
+        </div>
+    </main>
+    <footer class="mdl-mini-footer footer">
+        <div class="mdl-logo">
+            Made with
+            <img draggable="false" class="emoji" alt="❤" src="https://s.w.org/images/core/emoji/2.3/svg/2764.svg">
+            by <a class="footer-name" href="https://github.com/marciogurka/" target="_blank">Márcio José Gurka Júnior</a>
+        </div>
+        <ul class="mdl-mini-footer__link-list">
+            <li>
+                <a href="https://github.com/marciogurka/JS-graph-search" target="_blank" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</div>
 </body>
-<script src="bfs.js"></script>
+<script src="graph.js"></script>
 </html>

@@ -1,8 +1,5 @@
 
 (function($){
-
-
-
     var Renderer = function(canvas){
         var canvas = $(canvas).get(0);
         var ctx = canvas.getContext("2d");
@@ -160,38 +157,38 @@
     }
 
     $(document).ready(function(){
-        var sys = arbor.ParticleSystem(1000, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
+        var sys = arbor.ParticleSystem(1300, 200, 0.5) // create the system with sensible repulsion/stiffness/friction
         sys.parameters({gravity:false}) // use center-gravity to make the graph settle nicely (ymmv)
         sys.renderer = Renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
 
         // add some nodes to the graph and watch it go...
-        n1 = sys.addNode("Aracaju", {shape:"rect", alpha:1});
-        n2 = sys.addNode("Belém", {shape:"rect", alpha:1});
-        n3 = sys.addNode("Belo Horizonte", {shape:"rect", alpha:1});
-        n4 = sys.addNode("Boa Vista", {shape:"rect", alpha:1});
-        n5 = sys.addNode("Brasília", {shape:"rect", alpha:1});
-        n6 = sys.addNode("Campo Grande", {shape:"rect", alpha:1});
-        n7 = sys.addNode("Cuiabá", {shape:"rect", alpha:1});
-        n8 = sys.addNode("Curitiba", {shape:"rect", alpha:1});
-        n9 = sys.addNode("Florianópolis", {shape:"rect", alpha:1});
-        n10 = sys.addNode("Fortaleza", {shape:"rect", alpha:1});
-        n11 = sys.addNode("Goiânia", {shape:"rect", alpha:1});
-        n12 = sys.addNode("João Pessoa", {shape:"rect", alpha:1});
-        n13 = sys.addNode("Macapá", {shape:"rect", alpha:1});
-        n14 = sys.addNode("Maceió", {shape:"rect", alpha:1});
-        n15 = sys.addNode("Manaus", {shape:"rect", alpha:1});
-        n16 = sys.addNode("Natal", {shape:"rect", alpha:1});
-        n17 = sys.addNode("Palmas", {shape:"rect", alpha:1});
-        n18 = sys.addNode("Porto Alegre", {shape:"rect", alpha:1});
-        n19 = sys.addNode("Porto Velho", {shape:"rect", alpha:1});
-        n20 = sys.addNode("Recife", {shape:"rect", alpha:1});
-        n21 = sys.addNode("Rio Branco", {shape:"rect", alpha:1});
-        n22 = sys.addNode("Rio de Janeiro", {shape:"rect", alpha:1});
-        n23 = sys.addNode("Salvador", {shape:"rect", alpha:1});
-        n24 = sys.addNode("São Luís", {shape:"rect", alpha:1});
-        n25 = sys.addNode("São Paulo", {shape:"rect", alpha:1});
-        n26 = sys.addNode("Teresina", {shape:"rect", alpha:1});
-        n27 = sys.addNode("Vitória", {shape:"rect", alpha:1});
+        n1 = sys.addNode("Aracaju", {shape:"rect", alpha:1, state:"se"});
+        n2 = sys.addNode("Belém", {shape:"rect", alpha:1, state:"pa"});
+        n3 = sys.addNode("Belo Horizonte", {shape:"rect", alpha:1, state:"mg"});
+        n4 = sys.addNode("Boa Vista", {shape:"rect", alpha:1, state:"rr"});
+        n5 = sys.addNode("Brasília", {shape:"rect", alpha:1, state:"df"});
+        n6 = sys.addNode("Campo Grande", {shape:"rect", alpha:1, state:"ms"});
+        n7 = sys.addNode("Cuiabá", {shape:"rect", alpha:1, state:"mt"});
+        n8 = sys.addNode("Curitiba", {shape:"rect", alpha:1, state:"pr"});
+        n9 = sys.addNode("Florianópolis", {shape:"rect", alpha:1, state:"sc"});
+        n10 = sys.addNode("Fortaleza", {shape:"rect", alpha:1, state:"ce"});
+        n11 = sys.addNode("Goiânia", {shape:"rect", alpha:1, state:"go"});
+        n12 = sys.addNode("João Pessoa", {shape:"rect", alpha:1, state:"pb"});
+        n13 = sys.addNode("Macapá", {shape:"rect", alpha:1, state:"ap"});
+        n14 = sys.addNode("Maceió", {shape:"rect", alpha:1, state:"al"});
+        n15 = sys.addNode("Manaus", {shape:"rect", alpha:1, state:"am"});
+        n16 = sys.addNode("Natal", {shape:"rect", alpha:1, state:"rn"});
+        n17 = sys.addNode("Palmas", {shape:"rect", alpha:1, state:"to"});
+        n18 = sys.addNode("Porto Alegre", {shape:"rect", alpha:1, state:"rs"});
+        n19 = sys.addNode("Porto Velho", {shape:"rect", alpha:1, state:"ro"});
+        n20 = sys.addNode("Recife", {shape:"rect", alpha:1, state:"pe"});
+        n21 = sys.addNode("Rio Branco", {shape:"rect", alpha:1, state:"ac"});
+        n22 = sys.addNode("Rio de Janeiro", {shape:"rect", alpha:1, state:"rj"});
+        n23 = sys.addNode("Salvador", {shape:"rect", alpha:1, state:"ba"});
+        n24 = sys.addNode("São Luís", {shape:"rect", alpha:1, state:"ma"});
+        n25 = sys.addNode("São Paulo", {shape:"rect", alpha:1, state:"sp"});
+        n26 = sys.addNode("Teresina", {shape:"rect", alpha:1, state:"pi"});
+        n27 = sys.addNode("Vitória", {shape:"rect", alpha:1, state:"es"});
 
         //Addind edges between nodes
         //N1
@@ -245,7 +242,6 @@
         sys.addEdge(n23,n27, {cost: 1163});
         sys.addEdge(n24,n26, {cost: 446});
 
-        console.log(n23.name, sys.getEdgesFrom(n23));
 
 
 
@@ -264,6 +260,103 @@
         //   }
         // })
 
-    })
+        var map_settings = {
+            map: 'brazil',
+            zoomButtons: false,
+            zoomMax: 1,
+            regionStyle: {
+                initial: {
+                    'fill-opacity': 0.9,
+                    stroke: '#000',
+                    'stroke-width': 100,
+                    'stroke-opacity': 1
+                },
+                hover: {
+                    fill: '#00709a'
+                }
+            },
+            backgroundColor: '#ffffff',
+            series: {
+                regions: [{
+                    values: {
+                        // Região Norte
+                        ac: '#fff9c2',
+                        am: '#fff9c2',
+                        ap: '#fff9c2',
+                        pa: '#fff9c2',
+                        ro: '#fff9c2',
+                        rr: '#fff9c2',
+                        to: '#fff9c2',
+                        // Região Nordeste
+                        al: '#fcdeeb',
+                        ba: '#fcdeeb',
+                        ce: '#fcdeeb',
+                        ma: '#fcdeeb',
+                        pb: '#fcdeeb',
+                        pe: '#fcdeeb',
+                        pi: '#fcdeeb',
+                        rn: '#fcdeeb',
+                        se: '#fcdeeb',
+                        // Região Centro-Oeste
+                        df: '#feb83d',
+                        go: '#feb83d',
+                        ms: '#feb83d',
+                        mt: '#feb83d',
+                        // Região Sudeste
+                        es: '#e8ec9b',
+                        mg: '#e8ec9b',
+                        rj: '#e8ec9b',
+                        sp: '#e8ec9b',
+                        // Região Sul
+                        pr: '#fef56c',
+                        rs: '#fef56c',
+                        sc: '#fef56c'
+                    },
+                    attribute: 'fill'
+                }]
+            },
+            container: $('#brazil-map'),
+            onRegionClick: function (event, code) {
+                var selectedRegions = map.getSelectedRegions();
+                var result = $.grep(selectedRegions, function(e){ return e == code; });
+                if(!result.length){
+                    if(map.getSelectedRegions().length < 2){
+                        map.setSelectedRegions(code);
+                    } else {
+                        map.clearSelectedRegions();
+                        map.setSelectedRegions(code);
+                    }
+                } else {
+                    console.log(map.getSelectedRegions());
+                }
+
+            },
+            onRegionOver: function (event, code) {
+                $('#hovered-region span').text(code);
+            }
+        };
+
+        map = new jvm.WorldMap($.extend(true, {}, map_settings));
+
+        $("#option-bfs").on("click", function () {
+            if(map.getSelectedRegions().length == 2) {
+                var states = map.getSelectedRegions();
+                var nodes = [];
+                sys.eachNode(function(node){
+                    if(node.data.state.localeCompare(states[0]) == 0){
+                        nodes[0] = node;
+                    } else if(node.data.state.localeCompare(states[1]) == 0){
+                        nodes[1] = node;
+                    }
+                });
+                BFS(sys, nodes);
+            } else {
+                showSnackBar("Nós não selecionados");
+            }
+
+        });
+    });
+
+
 
 })(this.jQuery);
