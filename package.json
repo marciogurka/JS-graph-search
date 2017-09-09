@@ -1,0 +1,22 @@
+{
+  "name": "js-graph-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "arbor-tween.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marciogurka/JS-graph-search.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marciogurka/JS-graph-search/issues"
+  },
+  "homepage": "https://github.com/marciogurka/JS-graph-search#readme",
+  "dependencies": {
+    "ammap3": "github:amcharts/ammap3"
+  }
+}
