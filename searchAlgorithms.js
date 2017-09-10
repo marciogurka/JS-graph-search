@@ -174,7 +174,7 @@ function AStar(graph, nodes) {
         var edges = graph.getEdgesFrom(node);
 
         edges.sort(function (edgeA, edgeB) {
-            return (edgeA.data.flightCost + edgeA.data.cost) < (edgeB.data.flightCost + edgeB.data.cost);
+            return (findHeuristicCost(edgeA.target, nodes[1]) + edgeA.data.cost) < (findHeuristicCost(edgeB.target, nodes[1]) + edgeB.data.cost);
         });
 
         var hasFinal = edges.filter(function( edge ) {
@@ -183,13 +183,13 @@ function AStar(graph, nodes) {
 
         if(hasFinal.length){
             path.push(hasFinal[0].target);
-            cost = cost + hasFinal[0].data.flightCost + hasFinal[0].data.cost;
+            cost = cost + findHeuristicCost(hasFinal[0].target, nodes[1]) + hasFinal[0].data.cost;
             hasSolution = true;
             queue = [];
         } else {
             for(var edge of edges){
                 if(!edge.target.data.visited){
-                    var edge_total_cost = edge.data.flightCost + edge.data.cost;
+                    var edge_total_cost = findHeuristicCost(edge.target, nodes[1]) + edge.data.cost;
                     edge.target.data.cost = edge_total_cost;
                     queue.push(edge.target);
                 }

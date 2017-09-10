@@ -157,38 +157,41 @@
     }
 
     $(document).ready(function(){
+
         var sys = arbor.ParticleSystem(1300, 200, 0.5) // create the system with sensible repulsion/stiffness/friction
         sys.parameters({gravity:false}) // use center-gravity to make the graph settle nicely (ymmv)
         sys.renderer = Renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
 
         // add some nodes to the graph and watch it go...
-        var n1 = sys.addNode("Aracaju", {shape:"rect", alpha:1, state:"se", visited: false});
-        var n2 = sys.addNode("Belém", {shape:"rect", alpha:1, state:"pa", visited: false});
-        var n3 = sys.addNode("Belo Horizonte", {shape:"rect", alpha:1, state:"mg", visited: false});
-        var n4 = sys.addNode("Boa Vista", {shape:"rect", alpha:1, state:"rr", visited: false});
-        var n5 = sys.addNode("Brasília", {shape:"rect", alpha:1, state:"df", visited: false});
-        var n6 = sys.addNode("Campo Grande", {shape:"rect", alpha:1, state:"ms", visited: false});
-        var n7 = sys.addNode("Cuiabá", {shape:"rect", alpha:1, state:"mt", visited: false});
-        var n8 = sys.addNode("Curitiba", {shape:"rect", alpha:1, state:"pr", visited: false});
-        var n9 = sys.addNode("Florianópolis", {shape:"rect", alpha:1, state:"sc", visited: false});
-        var n10 = sys.addNode("Fortaleza", {shape:"rect", alpha:1, state:"ce", visited: false});
-        var n11 = sys.addNode("Goiânia", {shape:"rect", alpha:1, state:"go", visited: false});
-        var n12 = sys.addNode("João Pessoa", {shape:"rect", alpha:1, state:"pb", visited: false});
-        var n13 = sys.addNode("Macapá", {shape:"rect", alpha:1, state:"ap", visited: false});
-        var n14 = sys.addNode("Maceió", {shape:"rect", alpha:1, state:"al", visited: false});
-        var n15 = sys.addNode("Manaus", {shape:"rect", alpha:1, state:"am", visited: false});
-        var n16 = sys.addNode("Natal", {shape:"rect", alpha:1, state:"rn", visited: false});
-        var n17 = sys.addNode("Palmas", {shape:"rect", alpha:1, state:"to", visited: false});
-        var n18 = sys.addNode("Porto Alegre", {shape:"rect", alpha:1, state:"rs", visited: false});
-        var n19 = sys.addNode("Porto Velho", {shape:"rect", alpha:1, state:"ro", visited: false});
-        var n20 = sys.addNode("Recife", {shape:"rect", alpha:1, state:"pe", visited: false});
-        var n21 = sys.addNode("Rio Branco", {shape:"rect", alpha:1, state:"ac", visited: false});
-        var n22 = sys.addNode("Rio de Janeiro", {shape:"rect", alpha:1, state:"rj", visited: false});
-        var n23 = sys.addNode("Salvador", {shape:"rect", alpha:1, state:"ba", visited: false});
-        var n24 = sys.addNode("São Luís", {shape:"rect", alpha:1, state:"ma", visited: false});
-        var n25 = sys.addNode("São Paulo", {shape:"rect", alpha:1, state:"sp", visited: false});
-        var n26 = sys.addNode("Teresina", {shape:"rect", alpha:1, state:"pi", visited: false});
-        var n27 = sys.addNode("Vitória", {shape:"rect", alpha:1, state:"es", visited: false});
+        n1 = sys.addNode("Aracaju", {shape:"rect", alpha:1, state:"se", visited: false});
+        n2 = sys.addNode("Belém", {shape:"rect", alpha:1, state:"pa", visited: false});
+        n3 = sys.addNode("Belo Horizonte", {shape:"rect", alpha:1, state:"mg", visited: false});
+        n4 = sys.addNode("Boa Vista", {shape:"rect", alpha:1, state:"rr", visited: false});
+        n5 = sys.addNode("Brasília", {shape:"rect", alpha:1, state:"df", visited: false});
+        n6 = sys.addNode("Campo Grande", {shape:"rect", alpha:1, state:"ms", visited: false});
+        n7 = sys.addNode("Cuiabá", {shape:"rect", alpha:1, state:"mt", visited: false});
+        n8 = sys.addNode("Curitiba", {shape:"rect", alpha:1, state:"pr", visited: false});
+        n9 = sys.addNode("Florianópolis", {shape:"rect", alpha:1, state:"sc", visited: false});
+        n10 = sys.addNode("Fortaleza", {shape:"rect", alpha:1, state:"ce", visited: false});
+        n11 = sys.addNode("Goiânia", {shape:"rect", alpha:1, state:"go", visited: false});
+        n12 = sys.addNode("João Pessoa", {shape:"rect", alpha:1, state:"pb", visited: false});
+        n13 = sys.addNode("Macapá", {shape:"rect", alpha:1, state:"ap", visited: false});
+        n14 = sys.addNode("Maceió", {shape:"rect", alpha:1, state:"al", visited: false});
+        n15 = sys.addNode("Manaus", {shape:"rect", alpha:1, state:"am", visited: false});
+        n16 = sys.addNode("Natal", {shape:"rect", alpha:1, state:"rn", visited: false});
+        n17 = sys.addNode("Palmas", {shape:"rect", alpha:1, state:"to", visited: false});
+        n18 = sys.addNode("Porto Alegre", {shape:"rect", alpha:1, state:"rs", visited: false});
+        n19 = sys.addNode("Porto Velho", {shape:"rect", alpha:1, state:"ro", visited: false});
+        n20 = sys.addNode("Recife", {shape:"rect", alpha:1, state:"pe", visited: false});
+        n21 = sys.addNode("Rio Branco", {shape:"rect", alpha:1, state:"ac", visited: false});
+        n22 = sys.addNode("Rio de Janeiro", {shape:"rect", alpha:1, state:"rj", visited: false});
+        n23 = sys.addNode("Salvador", {shape:"rect", alpha:1, state:"ba", visited: false});
+        n24 = sys.addNode("São Luís", {shape:"rect", alpha:1, state:"ma", visited: false});
+        n25 = sys.addNode("São Paulo", {shape:"rect", alpha:1, state:"sp", visited: false});
+        n26 = sys.addNode("Teresina", {shape:"rect", alpha:1, state:"pi", visited: false});
+        n27 = sys.addNode("Vitória", {shape:"rect", alpha:1, state:"es", visited: false});
+
+        createHeuristics();
 
         //Addind edges between nodes
         //N1
@@ -445,7 +448,6 @@
                 var result = AStar(sys, nodes);
 
                 if(result.path.length){
-                    console.log(result);
                     result.path.shift();
                     result.path.pop();
                     result.path.forEach(function (node) {

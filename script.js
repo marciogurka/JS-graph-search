@@ -47,7 +47,7 @@ var map = AmCharts.makeChart("brazil-map", {
                 map.returnInitialColor( selectedStates[1] );
                 area.showAsSelected = true;
                 area.order = 1;
-            }
+            } 
         }
     }]
 });
