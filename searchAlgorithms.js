@@ -114,8 +114,9 @@ function GBFS(graph, nodes) {
         }
         path.push(node);
         var edges = graph.getEdgesFrom(node);
+
         edges.sort(function (edgeA, edgeB) {
-            return edgeA.data.flightCost < edgeB.data.flightCost;
+            return (findHeuristicCost(edgeA.target, nodes[1])) < (findHeuristicCost(edgeB.target, nodes[1]));
         });
 
         var hasFinal = edges.filter(function( edge ) {
@@ -125,14 +126,14 @@ function GBFS(graph, nodes) {
         if(hasFinal.length){
             path.push(hasFinal[0].target);
             cost = cost + hasFinal[0].data.cost;
-            heuristicsCost = heuristicsCost + hasFinal[0].data.flightCost;
+            heuristicsCost = heuristicsCost + findHeuristicCost(hasFinal[0].target, nodes[1]);
             hasSolution = true;
             queue = [];
         } else {
             for(var edge of edges){
                 if(!edge.target.data.visited){
                     edge.target.data.cost = edge.data.cost;
-                    edge.target.data.flightCost = edge.data.flightCost;
+                    edge.target.data.flightCost = findHeuristicCost(edge.target, nodes[1]);
                     queue.push(edge.target);
                 }
             }
