@@ -312,7 +312,9 @@
         $("#option-bfs").on("click", function () {
             var selectedStates = getSelectedStates();
             if(selectedStates.length == 2) {
-                console.log(selectedStates)
+                selectedStates.sort(function (state1, state2){
+                    return state1.order > state2.order;
+                });
                 var nodes = [];
                 sys.eachNode(function(node){
                     if(node.data.state.toLowerCase().localeCompare(selectedStates[0].id.toLowerCase()) == 0){
@@ -321,7 +323,6 @@
                         nodes[1] = node;
                     }
                 });
-                console.log(nodes);
 
                 var result = BFS(sys, nodes);
 
@@ -351,7 +352,9 @@
         $("#option-dfs").on("click", function () {
             var selectedStates = getSelectedStates();
             if(selectedStates.length == 2) {
-                console.log(selectedStates)
+                selectedStates.sort(function (state1, state2){
+                    return state1.order > state2.order;
+                });
                 var nodes = [];
                 sys.eachNode(function(node){
                     if(node.data.state.toLowerCase().localeCompare(selectedStates[0].id.toLowerCase()) == 0){
@@ -360,7 +363,6 @@
                         nodes[1] = node;
                     }
                 });
-                console.log(nodes);
 
                 var result = DFS(sys, nodes);
 
@@ -389,7 +391,9 @@
         $("#option-gbfs").on("click", function () {
             var selectedStates = getSelectedStates();
             if(selectedStates.length == 2) {
-                console.log(selectedStates)
+                selectedStates.sort(function (state1, state2){
+                    return state1.order > state2.order;
+                });
                 var nodes = [];
                 sys.eachNode(function(node){
                     if(node.data.state.toLowerCase().localeCompare(selectedStates[0].id.toLowerCase()) == 0){
@@ -398,11 +402,50 @@
                         nodes[1] = node;
                     }
                 });
-                console.log(nodes);
 
                 var result = GBFS(sys, nodes);
 
                 if(result.path.length){
+                    result.path.shift();
+                    result.path.pop();
+                    result.path.forEach(function (node) {
+                        var area = map.getObjectById(node.data.state.toUpperCase());
+                        area.color = '#000000';
+                        area.colorReal = area.color;
+                        area.validate();
+                        setTimeout(function(){
+                            area.color = '#67B7DC';
+                            area.colorReal = area.color;
+                            area.validate();
+                        }, 5000);
+
+                    })
+                }
+
+            } else {
+                showSnackBar("Nós não selecionados");
+            }
+        });
+
+        $("#option-astar").on("click", function () {
+            var selectedStates = getSelectedStates();
+            if(selectedStates.length == 2) {
+                selectedStates.sort(function (state1, state2){
+                    return state1.order > state2.order;
+                });
+                var nodes = [];
+                sys.eachNode(function(node){
+                    if(node.data.state.toLowerCase().localeCompare(selectedStates[0].id.toLowerCase()) == 0){
+                        nodes[0] = node;
+                    } else if(node.data.state.toLowerCase().localeCompare(selectedStates[1].id.toLowerCase()) == 0){
+                        nodes[1] = node;
+                    }
+                });
+
+                var result = AStar(sys, nodes);
+
+                if(result.path.length){
+                    console.log(result);
                     result.path.shift();
                     result.path.pop();
                     result.path.forEach(function (node) {
