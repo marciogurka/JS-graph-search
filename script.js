@@ -47,7 +47,7 @@ var map = AmCharts.makeChart("brazil-map", {
                 map.returnInitialColor( selectedStates[1] );
                 area.showAsSelected = true;
                 area.order = 1;
-            } 
+            }
         }
     }]
 });
@@ -59,4 +59,42 @@ function getSelectedStates() {
             selected.push(map.dataProvider.areas[i]);
     }
     return selected;
+}
+
+$(document).ready(function () {
+    dialog = document.querySelector('dialog');
+    if (! dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+    }
+    dialog.querySelector('.close').addEventListener('click', function() {
+        dialog.close();
+    });
+});
+
+function buildModalInfo(results) {
+    var $dialogContent = $('.mdl-dialog__content');
+    $dialogContent.html("");
+    results.forEach(function (result) {
+        var $h5 = $("<h5>"+ result.searchMethod +"</h5>");
+        $dialogContent.append($h5);
+        var $p = $('<p></p>');
+
+        var text = "The search had a cost of: " + result.cost;
+
+        if(result.heuristicsCost) {
+            text = text + ". The Heuristic had a cost of: "+ result.heuristicsCost;
+        }
+
+        text =  text + ". And the path that the search method did is: ";
+
+        result.path.forEach(function (node) {
+            text = text.concat(node.name + ", ");
+        });
+
+        text = text.slice(0, text.length - 2) + ".";
+
+        $p.html(text);
+        $dialogContent.append($p);
+    });
+    dialog.showModal();
 }

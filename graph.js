@@ -330,6 +330,8 @@
                 var result = BFS(sys, nodes);
 
                 if(result.path.length){
+                    result.searchMethod = 'Breadth-First Search Method';
+                    buildModalInfo([result]);
                     result.path.shift();
                     result.path.pop();
                     result.path.forEach(function (node) {
@@ -370,6 +372,8 @@
                 var result = DFS(sys, nodes);
 
                 if(result.path.length){
+                    result.searchMethod = 'Depth First Search Method';
+                    buildModalInfo([result]);
                     result.path.shift();
                     result.path.pop();
                     result.path.forEach(function (node) {
@@ -394,6 +398,7 @@
         $("#option-gbfs").on("click", function () {
             var selectedStates = getSelectedStates();
             if(selectedStates.length == 2) {
+
                 selectedStates.sort(function (state1, state2){
                     return state1.order > state2.order;
                 });
@@ -409,6 +414,8 @@
                 var result = GBFS(sys, nodes);
 
                 if(result.path.length){
+                    result.searchMethod = 'Greedy Best-First Search Method';
+                    buildModalInfo([result]);
                     result.path.shift();
                     result.path.pop();
                     result.path.forEach(function (node) {
@@ -448,6 +455,8 @@
                 var result = AStar(sys, nodes);
 
                 if(result.path.length){
+                    result.searchMethod = 'A* Method';
+                    buildModalInfo([result]);
                     result.path.shift();
                     result.path.pop();
                     result.path.forEach(function (node) {
