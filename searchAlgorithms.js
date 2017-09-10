@@ -93,6 +93,7 @@ function DFS(graph, nodes) {
 function GBFS(graph, nodes) {
     var path = [];
     var cost = 0;
+    var heuristicsCost = 0;
     var queue = [];
     var hasSolution = false;
 
@@ -127,6 +128,7 @@ function GBFS(graph, nodes) {
             for(var edge of edges){
                 if (!edge.target.data.visited && (edge.data.flightCost < lowest.data.flightCost)) {
                     edge.target.data.cost = edge.data.cost;
+                    heuristicsCost = heuristicsCost + edge.data.flightCost;
                     lowest = edge;
                 }
             }
@@ -141,7 +143,8 @@ function GBFS(graph, nodes) {
 
     var result = {
         path: path,
-        cost: cost
+        cost: cost,
+        heuristicsCost: heuristicsCost
     };
 
     return result;
