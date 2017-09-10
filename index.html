@@ -60,6 +60,14 @@
             width: 90%;
         }
 
+        .mdl-tabs__panel {
+            display: none;
+        }
+
+        .mdl-tabs__panel.is-active {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -81,10 +89,10 @@
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Graph Search</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="https://en.wikipedia.org/wiki/Breadth-first_search" target="_blank">Breadth First Search</a>
+            <a class="mdl-navigation__link" href="https://en.wikipedia.org/wiki/Depth-first_search" target="_blank">Depth First Search</a>
+            <a class="mdl-navigation__link" href="https://en.wikipedia.org/wiki/Best-first_search#Greedy_BFS" target="_blank">Greedy Best-First Search</a>
+            <a class="mdl-navigation__link" href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank">A*</a>
         </nav>
     </div>
     <main class="mdl-layout__content">
@@ -103,7 +111,7 @@
                         <li class="mdl-menu__item" id="option-dfs">Depth-First Search (DFS)</li>
                         <li class="mdl-menu__item" id="option-gbfs">Greedy Best-First Search</li>
                         <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" id="option-astar">A*</li>
-                        <li class="mdl-menu__item">Compare Methods</li>
+                        <li class="mdl-menu__item" id="compare-methods">Compare Methods</li>
                     </ul>
                     <div id="brazil-map"></div>
                 </div>

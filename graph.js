@@ -391,7 +391,7 @@
                 }
 
             } else {
-                showSnackBar("Nós não selecionados");
+                showSnackBar("Please select 2 nodes to search first!");
             }
         });
 
@@ -433,7 +433,7 @@
                 }
 
             } else {
-                showSnackBar("Nós não selecionados");
+                showSnackBar("Please select 2 nodes to search first!");
             }
         });
 
@@ -474,7 +474,54 @@
                 }
 
             } else {
-                showSnackBar("Nós não selecionados");
+                showSnackBar("Please select 2 nodes to search first!");
+            }
+        });
+
+        $("#compare-methods").on("click", function () {
+            var selectedStates = getSelectedStates();
+            if(selectedStates.length == 2) {
+                selectedStates.sort(function (state1, state2){
+                    return state1.order > state2.order;
+                });
+                var nodes = [];
+                sys.eachNode(function(node){
+                    if(node.data.state.toLowerCase().localeCompare(selectedStates[0].id.toLowerCase()) == 0){
+                        nodes[0] = node;
+                    } else if(node.data.state.toLowerCase().localeCompare(selectedStates[1].id.toLowerCase()) == 0){
+                        nodes[1] = node;
+                    }
+                });
+
+                var results = [];
+
+                var resultAStar = AStar(sys, nodes);
+                var resultGBFS = GBFS(sys, nodes);
+                var resultBFS = BFS(sys, nodes);
+                var resultDFS = DFS(sys, nodes);
+
+                if(resultBFS.path.length){
+                    resultBFS.searchMethod = 'Breadth-First Search Method';
+                    results.push(resultBFS);
+                }
+                if(resultDFS.path.length){
+                    resultDFS.searchMethod = 'Depth First Search Method';
+                    results.push(resultDFS);
+                }
+                if(resultGBFS.path.length){
+                    resultGBFS.searchMethod = 'Greedy Best-First Search Method';
+                    results.push(resultGBFS);
+                }
+                if(resultAStar.path.length){
+                    resultAStar.searchMethod = 'A* Method';
+                    results.push(resultAStar);
+                }
+
+
+                buildModalCompareInfo(results);
+
+            } else {
+                showSnackBar("Please select 2 nodes to search first!");
             }
         });
 
