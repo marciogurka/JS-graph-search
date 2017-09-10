@@ -386,6 +386,44 @@
             }
         });
 
+        $("#option-gbfs").on("click", function () {
+            var selectedStates = getSelectedStates();
+            if(selectedStates.length == 2) {
+                console.log(selectedStates)
+                var nodes = [];
+                sys.eachNode(function(node){
+                    if(node.data.state.toLowerCase().localeCompare(selectedStates[0].id.toLowerCase()) == 0){
+                        nodes[0] = node;
+                    } else if(node.data.state.toLowerCase().localeCompare(selectedStates[1].id.toLowerCase()) == 0){
+                        nodes[1] = node;
+                    }
+                });
+                console.log(nodes);
+
+                var result = GBFS(sys, nodes);
+
+                if(result.path.length){
+                    result.path.shift();
+                    result.path.pop();
+                    result.path.forEach(function (node) {
+                        var area = map.getObjectById(node.data.state.toUpperCase());
+                        area.color = '#000000';
+                        area.colorReal = area.color;
+                        area.validate();
+                        setTimeout(function(){
+                            area.color = '#67B7DC';
+                            area.colorReal = area.color;
+                            area.validate();
+                        }, 5000);
+
+                    })
+                }
+
+            } else {
+                showSnackBar("Nós não selecionados");
+            }
+        });
+
 });
 
 
