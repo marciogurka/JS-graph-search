@@ -24,7 +24,7 @@ function BFS(graph, nodes) {
             hasSolution = true;
             queue = [];
         } else {
-            for(var edge of edges){
+            edges.forEach(function (edge) {
                 if(!edge.target.data.visited){
                     path.push(edge.target);
                     cost = cost + edge.data.cost;
@@ -32,7 +32,7 @@ function BFS(graph, nodes) {
                     edge.target.data.cost = edge.data.cost;
                     queue.push(edge.target);
                 }
-            }
+            });
         }
     }
 
@@ -73,12 +73,12 @@ function DFS(graph, nodes) {
             stack = [];
         } else {
             var edges = graph.getEdgesFrom(node);
-            for(var edge of edges){
+            edges.forEach(function (edge) {
                 if (!edge.target.data.visited) {
                     edge.target.data.cost = edge.data.cost;
                     stack.push(edge.target);
                 }
-            }
+            });
         }
     }
 
@@ -136,13 +136,13 @@ function GBFS(graph, nodes) {
             hasSolution = true;
             queue = [];
         } else {
-            for(var edge of edges){
+            edges.forEach(function (edge) {
                 if(!edge.target.data.visited){
                     edge.target.data.cost = edge.data.cost;
                     edge.target.data.flightCost = findHeuristicCost(edge.target, nodes[1]);
                     queue.push(edge.target);
                 }
-            }
+            });
         }
     }
 
@@ -194,13 +194,13 @@ function AStar(graph, nodes) {
             hasSolution = true;
             queue = [];
         } else {
-            for(var edge of edges){
+            edges.forEach(function (edge) {
                 if(!edge.target.data.visited){
                     var edge_total_cost = findHeuristicCost(edge.target, nodes[1]) + edge.data.cost;
                     edge.target.data.cost = edge_total_cost;
                     queue.push(edge.target);
                 }
-            }
+            });
         }
     }
 
